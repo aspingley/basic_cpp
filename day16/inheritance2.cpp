@@ -24,10 +24,24 @@ enum Ingredients{
 
 class Pizza{
     private:
+        int private_access; 
+        void private_method(){}
         void CutPizza(){
         }
+    
+    protected:
+        int protected_access; // also functions/methods
+        void protected_method(){}
 
     public:
+
+        Pizza(){
+            std::cout << "Constructor PIZZA" << std::endl;
+        }
+
+        ~Pizza(){
+            std::cout << "Destructor PIZZA" << std::endl;
+        }
 
         void SelectBase(const PizzaSize& size){
             // some complicated is replaced with simple print statement
@@ -57,11 +71,22 @@ class Pizza{
 class BBQPizza: public Pizza{ // BBQ Pizza derives from Pizza
     private:
     public:
+
+        BBQPizza(){
+            std::cout << "Constructor BBQPizza" << std::endl;
+        }
+
+        ~BBQPizza(){
+            std::cout << "Destructor BBQPizza" << std::endl;
+        }
+
         std::string GetPizzaName(){
+            protected_method();
             return "BBQPizza";
         }
 
         short GetPizzaPrice(){
+            //private_method();
             return 750;
         }
 
@@ -73,6 +98,15 @@ class BBQPizza: public Pizza{ // BBQ Pizza derives from Pizza
 class MushroomPizza: public Pizza{ // MP is a type of Pizza
     private:
     public:
+
+        MushroomPizza(){
+            std::cout << "Constructor MushroomPizza" << std::endl;
+        }
+
+        ~MushroomPizza(){
+            std::cout << "Destructor MushroomPizza" << std::endl;
+        }
+
         std::string GetPizzaName(){
             return "MushroomPizza";
         }
@@ -89,11 +123,22 @@ class MushroomPizza: public Pizza{ // MP is a type of Pizza
 class TripleCheese: public Pizza{
     private:
     public:
+
+         TripleCheese(){
+            std::cout << "Constructor TripleCheese" << std::endl;
+        }
+
+        ~TripleCheese(){
+            std::cout << "Destructor TripleCheese" << std::endl;
+        }
+
         std::string GetPizzaName(){
             return "TripleCheese";
         }
 
         short GetPizzaPrice(){
+            //private_access = 10;
+            protected_access = 90;
             return 1000;
         }
 
@@ -110,19 +155,23 @@ class TripleCheese: public Pizza{
 
 int main(){
     
+    {
     MushroomPizza mp; // object created
-    mp.SelectBase(PizzaSize::Medium);
+    /*mp.SelectBase(PizzaSize::Medium);
     std::vector<CheeseTypes> mp_ct = {CheeseTypes::American};
     mp.ApplyCheese(mp_ct);
     std::vector<Ingredients> i_mp = {Ingredients::Mushroom, Ingredients::Onion};
     mp.SelectIngredients(i_mp);
     std::cout << "Order = " << mp.GetPizzaName() << \
     "\t" << mp.GetPizzaPrice() << std::endl;
+    //mp.protected_method();*/
+    }
 
     std::cout << "\n";
 
+    {
     TripleCheese tp;
-    tp.SelectBase(PizzaSize::Large);
+    /*tp.SelectBase(PizzaSize::Large);
     std::vector<CheeseTypes> tp_ct = {CheeseTypes::American, CheeseTypes::Goat,\
      CheeseTypes::Mozarella};
     tp.ApplyCheese(tp_ct);
@@ -130,7 +179,14 @@ int main(){
     tp.SelectIngredients(i_tp);
     std::cout << "Order = " << tp.GetPizzaName() << \
     "\t" << tp.GetPizzaPrice() << std::endl;
-    tp.dummyMethod();
+    tp.dummyMethod();*/
+    }
+
+ std::cout << "\n";
+ {
+     BBQPizza bp;
+ }
+
 
     return 0;
 }
