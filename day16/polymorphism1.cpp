@@ -35,6 +35,8 @@ class Pizza{
 
     public:
 
+        //FunctionPointer *__vptr; 
+
         Pizza(){
             std::cout << "Constructor PIZZA" << std::endl;
         }
@@ -52,7 +54,7 @@ class Pizza{
             std::cout << "ApplyCheese called in Pizza class" << std::endl;
         }
 
-        std::string GetPizzaName(){
+        virtual std::string GetPizzaName(){
             return "GetPizzaName in Pizza";
         }
 
@@ -97,9 +99,11 @@ class BBQPizza: public Pizza{ // BBQ Pizza derives from Pizza
 
 class MushroomPizza: public Pizza{ // MP is a type of Pizza
     private:
+        short price;
     public:
 
         MushroomPizza(){
+            price = 600;
             std::cout << "Constructor MushroomPizza" << std::endl;
         }
 
@@ -107,12 +111,14 @@ class MushroomPizza: public Pizza{ // MP is a type of Pizza
             std::cout << "Destructor MushroomPizza" << std::endl;
         }
 
-        std::string GetPizzaName(){
+        std::string GetPizzaName(){ // overriding of methods/functions
             return "MushroomPizza";
         }
 
         short GetPizzaPrice(){
-            return 600;
+            std::cout << "this: " << this << std::endl;
+            return this->price;
+            // this stands for THIS object
         }
 
         //void SelectIngredients(){
@@ -155,20 +161,33 @@ class TripleCheese: public Pizza{
 
 int main(){
     
-   //BBQPizza *bbq_pz = new BBQPizza();
-   std::cout << "Enter 1 for BBQPizza. 2 for Triple Cheese.";
+   /*MushroomPizza *m_pz = new MushroomPizza();
+   std::cout << "m_pz: " << m_pz << std::endl;
+   std::cout << m_pz->GetPizzaPrice() << std::endl;
+   delete m_pz;
+   m_pz = nullptr;
+   */
+
+   std::cout << "Enter 1 for BBQPizza. 2 for Triple Cheese. \
+   3 for Mushroom Pizza";
    short option = 0;
    std::cin >> option;
    Pizza *pizza = nullptr;
+   
    if (1 == option)
     pizza = new BBQPizza(); // dynamic polymorphism
-   else
+   else if(2 == option)
     pizza = new TripleCheese();
+   else if(3 == option)
+    pizza = new MushroomPizza();
 
-    //std::cout << pizza->GetPizzaName() << std::endl;
-
+    std::cout << pizza->GetPizzaName() << std::endl;
     delete pizza;
     pizza = nullptr;
+
+    Pizza *pizza2 = new Pizza();
+    std::cout << pizza2->GetPizzaName() << std::endl;
+    delete pizza2;
 
     return 0;
 }
