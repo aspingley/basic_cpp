@@ -33,6 +33,7 @@ int main(){
     delete _ipc;
     _ipc = nullptr;
 
+    intel::Connectivity *_ipc0 = new hp::HPConnectivity();
 
     return 0;
 }

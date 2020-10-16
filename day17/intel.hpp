@@ -5,7 +5,8 @@ namespace intel{
     class Connectivity{
         public:
             bool connect(const std::string&); // developed by Intel
-            virtual std::vector<std::string> discover(); // developed by HP
+            // to be developed by client of Connectivity library
+            virtual std::vector<std::string> discover() = 0; // makes the class abstract
             virtual ~Connectivity();
     };
 }

@@ -8,11 +8,14 @@ namespace intel{
         return true;
     }
     
-    std::vector<std::string> Connectivity::discover(){
+    // abstract methods will never be called
+    std::vector<std::string> Connectivity::discover(){ 
         std::cout << "implemented by whoever inherits" << std::endl;
         std::vector<std::string> emptyVector;
         return emptyVector;
     }
 
-    Connectivity::~Connectivity(){}
+    Connectivity::~Connectivity(){
+        std::cout << "destructor for Connectivity" << std::endl;
+    }
 }
